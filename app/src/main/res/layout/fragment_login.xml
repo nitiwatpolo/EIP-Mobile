@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_gradient_white_grey">
+
+        <LinearLayout
+            android:id="@+id/linearLogin"
+            android:layout_width="@dimen/fragment_login_frame_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/fragment_login_frame_padding">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/txtInputLayoutUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edtUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/fragment_login_txt_title_username"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/fragment_login_text_size" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/txtInputLayoutPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/fragment_login_txt_title_password"
+                    android:inputType="textPassword"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/fragment_login_text_size" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <th.co.ask.eip_mobile.view.CustomCheckBox
+                android:id="@+id/cbShowPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_login_checkbox_margin"
+                android:text="@string/fragment_login_txt_title_show_password"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/fragment_login_text_size"
+                app:typeface="roboto" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.andexert.library.RippleView
+                    android:id="@+id/rvSignin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/fragment_login_button_margin"
+                    app:rv_color="@color/colorDefaultRipple26"
+                    app:rv_rippleDuration="100">
+                    <th.co.ask.eip_mobile.view.CustomButton
+                        android:id="@+id/btnSignin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:paddingLeft="@dimen/fragment_login_button_padding"
+                        android:paddingRight="@dimen/fragment_login_button_padding"
+                        android:text="@string/fragment_login_txt_title_sign_in"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/fragment_login_text_size"
+                        app:typeface="roboto" />
+                </com.andexert.library.RippleView>
+
+                <com.andexert.library.RippleView
+                    android:id="@+id/rvClear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/rvSignin"
+                    app:rv_color="@color/colorDefaultRipple26"
+                    android:layout_marginRight="@dimen/fragment_login_button_margin"
+                    app:rv_rippleDuration="100"
+                    >
+
+                    <th.co.ask.eip_mobile.view.CustomButton
+                        android:id="@+id/btnClear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:paddingLeft="@dimen/fragment_login_button_padding"
+                        android:paddingRight="@dimen/fragment_login_button_padding"
+                        android:text="@string/fragment_login_txt_title_clear"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/fragment_login_text_size"
+                        app:typeface="roboto" />
+                </com.andexert.library.RippleView>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</android.support.v4.widget.NestedScrollView>

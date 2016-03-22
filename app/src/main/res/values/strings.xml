@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">EIP-Mobile</string>
+    <string name="dialog_txt_button_title_error">Found Problems</string>
+    <string name="dialog_txt_button_ok">OK</string>
+
+    <!-- Fragment Login-->
+    <string name="fragment_login_txt_title_username">Username</string>
+    <string name="fragment_login_txt_title_password">Password</string>
+    <string name="fragment_login_txt_title_show_password">Show Password</string>
+    <string name="fragment_login_txt_title_sign_in">SIGN IN</string>
+    <string name="fragment_login_txt_title_clear">CLEAR</string>
+    <!-- Home-->
+    <string name="activity_home_appbar_title">Welcome to EIS-Mobile</string>
+
+    <!-- Sale Call Main-->
+    <string name="activity_sale_call_toolbar_title">Welcome to Sale Call System</string>
+    <string name="menu_sale_call_work_plan">WORK PLAN</string>
+    <string name="menu_sale_call_plan_to_work">PLAN TO WORK</string>
+    <string name="menu_sale_call_to_do">TO DO</string>
+    <string name="menu_sale_call_search">SEARCH</string>
+    <string name="menu_sale_call_mkt_report">MKT Activity</string>
+    <string name="menu_sale_call_plan_report">WORK PLAN REPORT</string>
+
+    <!-- Work Plan Frag-->
+    <string name="fragment_work_plan_item_txt_sale_call_title">Sale Call No : \u0020</string>
+    <string name="fragment_work_plan_item_txt_todo_name_title">Todo Name : \u0020</string>
+    <string name="fragment_work_plan_item_txt_note_title">Note : \u0020</string>
+    <string name="fragment_work_plan_item_not_found_th">ไม่พบการนัดหมายใดๆในวันนี้</string>
+    <string name="fragment_work_plan_item_not_found_en">No appointments today.</string>
+</resources>

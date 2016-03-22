@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorDefaultRipple26">#42000000</color>
+    <color name="colorPrimaryText">#DE000000</color>
+    <color name="colorSecondaryText">#8A000000</color>
+    <color name="colorDisableText">#61000000</color>
+    <color name="colorDivider">#1F000000</color>
+    <color name="colorDarkPrimaryText">#FFFFFF</color>
+    <color name="colorDarkSecondaryText">#B3FFFFFF</color>
+    <color name="colorDarkDisableText">#80FFFFFF</color>
+    <color name="colorDarkDivider">#1FFFFFFF</color>
+    <color name="colorEventNegative">#ff0011</color>
+    <color name="colorEventPositive">#11ff00</color>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RobotoStyle">
+        <attr name="typeface" format="enum">
+            <enum name="roboto" value="0" />
+            <enum name="robotoBold" value="1" />
+            <enum name="robotoItalic" value="2" />
+            <enum name="robotoBoldItalic" value="3" />
+            <enum name="robotoThin" value="4" />
+            <enum name="robotoThinItalic" value="5" />
+            <enum name="robotoBlack" value="6" />
+            <enum name="robotoBlackItalic" value="7" />
+            <enum name="robotoLight" value="8" />
+            <enum name="robotoLightItalic" value="9" />
+            <enum name="robotoMedium" value="10" />
+            <enum name="robotoMediumItalic" value="11" />
+        </attr>
+    </declare-styleable>
+</resources>

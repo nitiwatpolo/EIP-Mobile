@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="profileMenu">
+        <item>Code :\u0020</item>
+        <item>Com Code :\u0020</item>
+        <item>Pre Branch :\u0020</item>
+        <item>Department :\u0020</item>
+        <item>Email :\u0020</item>
+    </array>
+    <array name="optionsMenu">
+        <item>Announment</item>
+        <item>Manuals</item>
+        <item>Update logs</item>
+        <item>Notification</item>
+        <item>Setting</item>
+        <item>Log out</item>
+    </array>
+
+    <string-array name="custom_weekdays_en">
+        <item>Su</item>
+        <item>M</item>
+        <item>Tu</item>
+        <item>W</item>
+        <item>Th</item>
+        <item>F</item>
+        <item>Sa</item>
+    </string-array>
+
+    <string-array name="custom_months_en">
+        <item>JAN</item>
+        <item>Feb</item>
+        <item>MARCH</item>
+        <item>April</item>
+        <item>MAY</item>
+        <item>June</item>
+        <item>JULY</item>
+        <item>Aug</item>
+        <item>SEPT</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>DEC</item>
+    </string-array>
+
+    <string-array name="custom_weekdays_th">
+        <item>อา.</item>
+        <item>จ.</item>
+        <item>อ.</item>
+        <item>พ.</item>
+        <item>พฤ.</item>
+        <item>ศ.</item>
+        <item>ส.</item>
+    </string-array>
+
+    <string-array name="custom_months_th">
+        <item>มกราคม</item>
+        <item>กุมภาพันธ์</item>
+        <item>มีนาคม</item>
+        <item>เมษายน</item>
+        <item>พฤษภาคม</item>
+        <item>มิถุนายน</item>
+        <item>กรกฎาคม</item>
+        <item>สิงหาคม</item>
+        <item>กันยายน</item>
+        <item>ตุลาคม</item>
+        <item>พฤศจิกายน</item>
+        <item>ธันวาคม</item>
+    </string-array>
+
+    <array name="listPreBranch">
+        <item>Head Office</item>
+        <item>ASKS</item>
+        <item>ASKR</item>
+        <item>ASKP</item>
+    </array>
+
+    <array name="listPreNameThai">
+        <item>นาย</item>
+        <item>นาง</item>
+        <item>นางสาว</item>
+    </array>
+    <array name="listPreNameEng">
+        <item>Mr.</item>
+        <item>Mrs.</item>
+        <item>Miss.</item>
+    </array>
+
+    <array name="listSource">
+        <item>Direct Team</item>
+    </array>
+    <array name="listMkt">
+        <item>Paranun Ch.charoenying</item>
+    </array>
+
+
+</resources>
