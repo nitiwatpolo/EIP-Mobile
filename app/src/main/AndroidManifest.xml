@@ -36,7 +36,9 @@
         <activity
             android:name=".activity.ApplySaleCallActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".activity.SaleCallMainActivity"></activity>
+        <activity
+            android:name=".activity.SaleCallMainActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"></activity>
     </application>
 
 </manifest>

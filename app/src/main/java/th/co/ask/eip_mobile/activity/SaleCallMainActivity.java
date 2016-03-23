@@ -3,6 +3,7 @@ package th.co.ask.eip_mobile.activity;
 import android.graphics.Typeface;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.bumptech.glide.Glide;
 import th.co.ask.eip_mobile.R;
 import th.co.ask.eip_mobile.adapter.SalCallMenuPagerAdapter;
 import th.co.ask.eip_mobile.fragment.FragmentLifecycle;
+import th.co.ask.eip_mobile.fragment.PlanToWorkFragment;
 import th.co.ask.eip_mobile.fragment.WorkPlanFragment;
 import th.co.ask.eip_mobile.view.CustomViewpager;
 
@@ -76,7 +78,6 @@ public class SaleCallMainActivity extends AppCompatActivity {
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
             viewPager.setCurrentItem(tab.getPosition(),false);
-            Log.e("select", "position" + tab.getPosition());
         }
 
         @Override

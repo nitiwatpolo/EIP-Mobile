@@ -66,6 +66,17 @@
         <item>ธันวาคม</item>
     </string-array>
 
+    <string-array name="filter_plan_to_do_title_en">
+        <item>All</item>
+        <item>Name</item>
+        <item>Card No</item>
+    </string-array>
+    <string-array name="filter_plan_to_do_value">
+        <item>-</item>
+        <item>name</item>
+        <item>cardNo</item>
+    </string-array>
+
     <array name="listPreBranch">
         <item>Head Office</item>
         <item>ASKS</item>
