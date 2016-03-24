@@ -25,7 +25,7 @@ import th.co.ask.eip_mobile.fragment.PlanToWorkFragment;
 import th.co.ask.eip_mobile.fragment.WorkPlanFragment;
 import th.co.ask.eip_mobile.view.CustomViewpager;
 
-public class SaleCallMainActivity extends AppCompatActivity {
+public class SaleCallMainActivity extends AppCompatActivity implements PlanToWorkFragment.PlanToWorkListener {
     private Toolbar toolbar;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private TabLayout tabLayout;
@@ -67,7 +67,7 @@ public class SaleCallMainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
         }
@@ -77,7 +77,7 @@ public class SaleCallMainActivity extends AppCompatActivity {
     private TabLayout.OnTabSelectedListener tabSelectedListener = new TabLayout.OnTabSelectedListener() {
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
-            viewPager.setCurrentItem(tab.getPosition(),false);
+            viewPager.setCurrentItem(tab.getPosition(), false);
         }
 
         @Override
@@ -90,6 +90,21 @@ public class SaleCallMainActivity extends AppCompatActivity {
             Log.e("reselect", "position" + tab.getPosition());
         }
     };
+
+    @Override
+    public void onTaskItemClickListener(View itemView, int position) {
+        Fragment fragment = adapter.getFragment("fragment:PlanToWorkFragment");
+        if (fragment instanceof PlanToWorkFragment) {
+
+            ((PlanToWorkFragment) fragment).callList(position);
+        }
+
+    }
+
+    @Override
+    public void onDetailItemClickListener(View itemView, int position) {
+
+    }
   /*
     private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
         int currentPosition = 0;

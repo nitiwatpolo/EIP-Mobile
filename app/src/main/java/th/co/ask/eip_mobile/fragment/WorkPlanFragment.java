@@ -134,12 +134,12 @@ public class WorkPlanFragment extends Fragment {
         tvTitleDateSelected = (TextView) rootView.findViewById(R.id.tvTitleDateSelected);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
 
-        if (savedInstanceState == null) {
-            callAllPlan();
-            callPlanByDate(year_selected, month_selected, day_selected);
-        } else {
+        if (savedInstanceState != null && allPlanDao != null) {
             setPlanEvents();
             setListPlanByDate();
+        } else {
+            callAllPlan();
+            callPlanByDate(year_selected, month_selected, day_selected);
         }
     }
 
@@ -286,7 +286,9 @@ public class WorkPlanFragment extends Fragment {
 
         @Override
         public void onFailure(Call<AllPlanDao> call, Throwable t) {
-            if (!t.getMessage().equals("Canceled") && !t.getMessage().equals("Socket closed")) {
+            if (t.getMessage() != null && t.getMessage().equals("Canceled") || t.getMessage().equals("Socket closed")) {
+
+            } else {
                 showAlertDialog(t.getMessage());
                 alllPlanDaoCall = null;
             }
@@ -314,10 +316,13 @@ public class WorkPlanFragment extends Fragment {
 
         @Override
         public void onFailure(Call<PlanByDateDao> call, Throwable t) {
-            if (!t.getMessage().equals("Canceled") && !t.getMessage().equals("Socket closed")) {
+            if (t.getMessage() != null && t.getMessage().equals("Canceled") || t.getMessage().equals("Socket closed")) {
+
+            } else {
                 showAlertDialog(t.getMessage());
                 planByDateDaoCall = null;
             }
+
 
         }
     };

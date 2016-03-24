@@ -6,8 +6,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import th.co.ask.eip_mobile.R;
 import th.co.ask.eip_mobile.fragment.MktReportFragment;
@@ -33,6 +37,7 @@ public class SalCallMenuPagerAdapter extends FragmentStatePagerAdapter {
     private final int TAB_SEARCH = 3;
     private final int TAB_MKT_REPORT = 4;
     private final int TAB_PLAN_REPORT = 5;
+    private Map<String, Fragment> mPageReferenceMap = new HashMap<String, Fragment>();
 
     public SalCallMenuPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -43,19 +48,47 @@ public class SalCallMenuPagerAdapter extends FragmentStatePagerAdapter {
         Fragment fragment = null;
         if (position == TAB_WORK_PLAN) {
             fragment = WorkPlanFragment.newInstance();
+            mPageReferenceMap.put("fragment:WorkPlanFragment", fragment);
         } else if (position == TAB_PLAN_TO_WORK) {
             fragment = PlanToWorkFragment.newInstance();
+            mPageReferenceMap.put("fragment:PlanToWorkFragment", fragment);
         } else if (position == TAB_TO_DO) {
             fragment = TodoFragment.newInstance();
+            mPageReferenceMap.put("fragment:TodoFragment", fragment);
         } else if (position == TAB_SEARCH) {
             fragment = SearchFragment.newInstance();
+            mPageReferenceMap.put("fragment:SearchFragment", fragment);
         } else if (position == TAB_MKT_REPORT) {
             fragment = MktReportFragment.newInstance();
+            mPageReferenceMap.put("fragment:MktReportFragment", fragment);
         } else if (position == TAB_PLAN_REPORT) {
             fragment = WorkPlanReportFragment.newInstance();
+            mPageReferenceMap.put("fragment:WorkPlanReportFragment", fragment);
         }
 
         return fragment;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        super.destroyItem(container, position, object);
+        if (position == TAB_WORK_PLAN) {
+            mPageReferenceMap.remove("fragment:WorkPlanFragment");
+        } else if (position == TAB_PLAN_TO_WORK) {
+            mPageReferenceMap.remove("fragment:PlanToWorkFragment");
+        } else if (position == TAB_TO_DO) {
+            mPageReferenceMap.remove("fragment:TodoFragment");
+        } else if (position == TAB_SEARCH) {
+            mPageReferenceMap.remove("fragment:SearchFragment");
+        } else if (position == TAB_MKT_REPORT) {
+            mPageReferenceMap.remove("fragment:MktReportFragment");
+        } else if (position == TAB_PLAN_REPORT) {
+            mPageReferenceMap.remove("fragment:WorkPlanReportFragment");
+        }
+    }
+
+    public Fragment getFragment(String key) {
+        return mPageReferenceMap.get(key);
     }
 
     @Override

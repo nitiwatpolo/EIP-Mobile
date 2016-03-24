@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by nitiwat.li on 22/03/2559.
  */
-public class ListPlanToWorkTodoListDao {
+public class ListPlanToWorkTodoDetailDao {
     @SerializedName("CUST_NAME")public String custName;
     @SerializedName("PLAN_DATE")public String planDate;
     @SerializedName("COM_CODE")public String comCode;

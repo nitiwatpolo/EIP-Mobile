@@ -21,12 +21,12 @@ public interface PlanToWorkService {
                                                     @Path("code") String code);
 
     @GET("module/EIP_Services/planToWork_todoList/{device}/{comCode}/{code}/{todoCode}/{page}/{numPerPage}/{field}/{value}")
-    Call<PlanToWorkTodoListDao> workPlan_PlanByDate(@Path("device") String device,
+    Call<PlanToWorkTodoListDao> planToWork_todoList(@Path("device") String device,
                                             @Path("comCode") String comCode,
                                             @Path("code") String code,
                                             @Path("todoCode") String todoCode,
-                                            @Path("page") String page,
-                                            @Path("numPerPage") String numPerPage,
+                                            @Path("page") int page,
+                                            @Path("numPerPage") int numPerPage,
                                             @Path("field") String field,
                                             @Path("value") String value);
 

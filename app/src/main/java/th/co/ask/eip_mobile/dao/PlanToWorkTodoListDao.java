@@ -13,7 +13,7 @@ public class PlanToWorkTodoListDao {
     @SerializedName("COM_CODE")
     public String comCode;
     @SerializedName("DETAIL")
-    public List<ListPlanToWorkTodoListDao> detail;
+    public List<ListPlanToWorkTodoDetailDao> detail;
     @SerializedName("TODO_CODE")
     public String todoCode;
 
@@ -33,11 +33,11 @@ public class PlanToWorkTodoListDao {
         this.comCode = comCode;
     }
 
-    public List<ListPlanToWorkTodoListDao> getDetail() {
+    public List<ListPlanToWorkTodoDetailDao> getDetail() {
         return detail;
     }
 
-    public void setDetail(List<ListPlanToWorkTodoListDao> detail) {
+    public void setDetail(List<ListPlanToWorkTodoDetailDao> detail) {
         this.detail = detail;
     }
 
