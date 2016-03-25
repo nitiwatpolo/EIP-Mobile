@@ -1,10 +1,13 @@
 package th.co.ask.eip_mobile.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -89,18 +92,16 @@ public class WorkPlanFragment extends Fragment {
 
         if (savedInstanceState != null) {
             onRestoreInstanceState(savedInstanceState);
-        } else {
-            Calendar calendar = Calendar.getInstance();
-            day_selected = calendar.get(Calendar.DAY_OF_MONTH);
-            month_selected = calendar.get(Calendar.MONTH);
-            year_selected = calendar.get(Calendar.YEAR);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_work_plan, container, false);
+        final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.AppTheme);
+        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+        View rootView = localInflater.inflate(R.layout.fragment_work_plan, container, false);
+
         initInstances(rootView, savedInstanceState);
         return rootView;
     }
@@ -108,6 +109,10 @@ public class WorkPlanFragment extends Fragment {
     @SuppressWarnings("UnusedParameters")
     private void init(Bundle savedInstanceState) {
         // Init Fragment level's variable(s) here
+        Calendar calendar = Calendar.getInstance();
+        day_selected = calendar.get(Calendar.DAY_OF_MONTH);
+        month_selected = calendar.get(Calendar.MONTH);
+        year_selected = calendar.get(Calendar.YEAR);
     }
 
     @SuppressWarnings("UnusedParameters")
@@ -134,43 +139,19 @@ public class WorkPlanFragment extends Fragment {
         tvTitleDateSelected = (TextView) rootView.findViewById(R.id.tvTitleDateSelected);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
 
-        if (savedInstanceState != null && allPlanDao != null) {
-            setPlanEvents();
-            setListPlanByDate();
-        } else {
-            callAllPlan();
-            callPlanByDate(year_selected, month_selected, day_selected);
-        }
+        callAllPlan();
+        callPlanByDate(year_selected, month_selected, day_selected);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         // Save Instance (Fragment level's variables) State here
-
-        Bundle bundle = new Bundle();
-        bundle.putInt("day", day_selected);
-        bundle.putInt("month", month_selected);
-        bundle.putInt("year", year_selected);
-        bundle.putString("date", date_selected);
-        bundle.putParcelable("allPlanDao", allPlanDao);
-        bundle.putParcelable("planByDateDao", planByDateDao);
-        outState.putBundle("calendar", bundle);
-
-
     }
 
     @SuppressWarnings("UnusedParameters")
     private void onRestoreInstanceState(Bundle savedInstanceState) {
         // Restore Instance (Fragment level's variables) State here
-        Bundle bundle = savedInstanceState.getBundle("calendar");
-        day_selected = bundle.getInt("day");
-        month_selected = bundle.getInt("month");
-        year_selected = bundle.getInt("year");
-        date_selected = bundle.getString("date");
-        allPlanDao = bundle.getParcelable("allPlanDao");
-        planByDateDao = bundle.getParcelable("planByDateDao");
-
     }
 
     private void showAlertDialog(String msg) {
@@ -213,8 +194,6 @@ public class WorkPlanFragment extends Fragment {
                 datesPositive.add(day);
             }
         }
-
-        Log.e("datesNegative", ":" + datesNegative.size() + ":" + datesNegative.get(0));
 
         calendarView.addDecorators(new EventDecorator(ContextCompat.getColor(Contextor.getInstance().getContext(), R.color.colorEventNegative), datesNegative),
                 new EventDecorator(ContextCompat.getColor(Contextor.getInstance().getContext(), R.color.colorEventPositive), datesPositive));
@@ -262,6 +241,13 @@ public class WorkPlanFragment extends Fragment {
     }
 
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        stopAllPlanCall();
+        stopPlanByDateCall();
+    }
+
     Callback<AllPlanDao> callbackAllPlan = new Callback<AllPlanDao>() {
         @Override
         public void onResponse(Call<AllPlanDao> call, Response<AllPlanDao> response) {
@@ -286,7 +272,7 @@ public class WorkPlanFragment extends Fragment {
 
         @Override
         public void onFailure(Call<AllPlanDao> call, Throwable t) {
-            if (t.getMessage() != null && t.getMessage().equals("Canceled") || t.getMessage().equals("Socket closed")) {
+            if (t != null && (t.getMessage().equals("Canceled") || t.getMessage().equals("Socket closed"))) {
 
             } else {
                 showAlertDialog(t.getMessage());
@@ -316,7 +302,7 @@ public class WorkPlanFragment extends Fragment {
 
         @Override
         public void onFailure(Call<PlanByDateDao> call, Throwable t) {
-            if (t.getMessage() != null && t.getMessage().equals("Canceled") || t.getMessage().equals("Socket closed")) {
+            if (t != null && (t.getMessage().equals("Canceled") || t.getMessage().equals("Socket closed"))) {
 
             } else {
                 showAlertDialog(t.getMessage());

@@ -38,7 +38,8 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.SaleCallMainActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            android:theme="@style/CustomMaterialDrawerTheme"/>
     </application>
 
 </manifest>

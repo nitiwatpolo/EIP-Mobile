@@ -1,68 +1,113 @@
 package th.co.ask.eip_mobile.activity;
 
-import android.graphics.Typeface;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.mikepenz.crossfader.Crossfader;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
+import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.MiniDrawer;
+import com.mikepenz.materialdrawer.icons.MaterialDrawerFont;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.Nameable;
+import com.mikepenz.materialize.util.UIUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import th.co.ask.eip_mobile.R;
-import th.co.ask.eip_mobile.adapter.SalCallMenuPagerAdapter;
-import th.co.ask.eip_mobile.fragment.FragmentLifecycle;
 import th.co.ask.eip_mobile.fragment.PlanToWorkFragment;
 import th.co.ask.eip_mobile.fragment.WorkPlanFragment;
-import th.co.ask.eip_mobile.view.CustomViewpager;
+import th.co.ask.eip_mobile.manager.CrossfadeWrapper;
 
-public class SaleCallMainActivity extends AppCompatActivity implements PlanToWorkFragment.PlanToWorkListener {
+public class SaleCallMainActivity extends AppCompatActivity {
     private Toolbar toolbar;
-    private CollapsingToolbarLayout collapsingToolbarLayout;
-    private TabLayout tabLayout;
-    private CustomViewpager viewPager;
-    private SalCallMenuPagerAdapter adapter;
+    private Drawer result = null;
+    private MiniDrawer miniResult = null;
+    private Crossfader crossFader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale_call_main);
-        initInstances();
+        initInstances(savedInstanceState);
     }
 
-    private void initInstances() {
+    private void initInstances(Bundle savedInstanceState) {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle("SALE CALL SYSTEM");
 
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
-        collapsingToolbarLayout.setTitleEnabled(false);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        //Create the drawer
+        result = new DrawerBuilder()
+                .withActivity(this)
+                .withTranslucentStatusBar(false)
+                .withDrawerItems(generateListDrawer())
+                 .withGenerateMiniDrawer(true)
+                .withSavedInstance(savedInstanceState)
+                .withOnDrawerItemClickListener(drawerItemClickListener)
+                .buildView();
 
-        viewPager = (CustomViewpager) findViewById(R.id.viewPager);
-        adapter = new SalCallMenuPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
-        viewPager.setPagingEnabled(false);
-        tabLayout.setupWithViewPager(viewPager);
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            TabLayout.Tab tab = tabLayout.getTabAt(i);
-            tab.setCustomView(adapter.getTabView(i));
+        miniResult = result.getMiniDrawer().withInRTL(true);
+
+        //get the widths in px for the first and second panel
+        int firstWidth = (int) UIUtils.convertDpToPixel(300, this);
+        int secondWidth = (int) UIUtils.convertDpToPixel(72, this);
+
+        crossFader = new Crossfader()
+                .withContent(findViewById(R.id.rootContent))
+                .withFirst(result.getSlider(), firstWidth)
+                .withSecond(miniResult.build(this), secondWidth)
+                .withSavedInstance(savedInstanceState)
+                .build();
+
+        miniResult.withCrossFader(new CrossfadeWrapper(crossFader));
+        crossFader.getCrossFadeSlidingPaneLayout().setShadowResourceLeft(R.drawable.material_drawer_shadow_left);
+        crossFader.getCrossFadeSlidingPaneLayout().setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.colorAccent));
+    }
+
+    private List<IDrawerItem> generateListDrawer() {
+        List<IDrawerItem> mStickyDrawerItems = new ArrayList<>();
+        mStickyDrawerItems.add(new PrimaryDrawerItem().withTag("WORKPLAN").withName("Work Plan").withIcon(GoogleMaterial.Icon.gmd_event).withIdentifier(1));
+        mStickyDrawerItems.add(new PrimaryDrawerItem().withTag("PlanToWork").withName("Plan to Work").withIcon(GoogleMaterial.Icon.gmd_timer).withIdentifier(2));
+        mStickyDrawerItems.add(new PrimaryDrawerItem().withTag("TODO").withName("To do").withIcon(GoogleMaterial.Icon.gmd_contact_phone).withIdentifier(3));
+        mStickyDrawerItems.add(new PrimaryDrawerItem().withTag("SEARCH").withName("SEARCH").withIcon(GoogleMaterial.Icon.gmd_search).withIdentifier(4));
+        mStickyDrawerItems.add(new PrimaryDrawerItem().withTag("MKT REPORT").withName("KT REPORT").withIcon(GoogleMaterial.Icon.gmd_insert_chart).withIdentifier(5));
+        mStickyDrawerItems.add(new PrimaryDrawerItem().withTag("WORK PLAN REPORT").withName("WORK PLAN REPORT").withIcon(GoogleMaterial.Icon.gmd_assignment).withIdentifier(6));
+
+        return mStickyDrawerItems;
+    }
+
+    private void initFragment(String tag) {
+        if (tag.equals("WORKPLAN")) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, WorkPlanFragment.newInstance()).commit();
+        } else if (tag.equals("PlanToWork")) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer, PlanToWorkFragment.newInstance()).commit();
+
         }
-        tabLayout.getTabAt(0).getCustomView().setSelected(true);
+    }
 
-        tabLayout.setOnTabSelectedListener(tabSelectedListener);
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState = result.saveInstanceState(outState);
+        outState = crossFader.saveInstanceState(outState);
+
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -74,65 +119,26 @@ public class SaleCallMainActivity extends AppCompatActivity implements PlanToWor
         return super.onOptionsItemSelected(item);
     }
 
-    private TabLayout.OnTabSelectedListener tabSelectedListener = new TabLayout.OnTabSelectedListener() {
-        @Override
-        public void onTabSelected(TabLayout.Tab tab) {
-            viewPager.setCurrentItem(tab.getPosition(), false);
-        }
-
-        @Override
-        public void onTabUnselected(TabLayout.Tab tab) {
-
-        }
-
-        @Override
-        public void onTabReselected(TabLayout.Tab tab) {
-            Log.e("reselect", "position" + tab.getPosition());
-        }
-    };
-
     @Override
-    public void onTaskItemClickListener(View itemView, int position) {
-        Fragment fragment = adapter.getFragment("fragment:PlanToWorkFragment");
-        if (fragment instanceof PlanToWorkFragment) {
-
-            ((PlanToWorkFragment) fragment).callList(position);
+    public void onBackPressed() {
+        //handle the back press :D close the drawer first and if the drawer is closed close the activity
+        if (result != null && result.isDrawerOpen()) {
+            result.closeDrawer();
+        } else {
+            super.onBackPressed();
         }
-
     }
 
-    @Override
-    public void onDetailItemClickListener(View itemView, int position) {
-
-    }
-  /*
-    private ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
-        int currentPosition = 0;
-
+    Drawer.OnDrawerItemClickListener drawerItemClickListener = new Drawer.OnDrawerItemClickListener() {
         @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int newPosition) {
-
-            FragmentLifecycle fragmentToShow = (FragmentLifecycle) adapter.getItem(newPosition);
-            fragmentToShow.onResumeFragment();
-
-            FragmentLifecycle fragmentToHide = (FragmentLifecycle) adapter.getItem(currentPosition);
-            fragmentToHide.onPauseFragment();
-
-            currentPosition = newPosition;
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
+        public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+            if (drawerItem instanceof Nameable) {
+                Toast.makeText(SaleCallMainActivity.this, ((Nameable) drawerItem).getName().getText(SaleCallMainActivity.this)
+                        , Toast.LENGTH_SHORT).show();
+                initFragment(drawerItem.getTag().toString());
+                result.closeDrawer();
+            }
+            return false;
         }
     };
-
-    */
-
 }

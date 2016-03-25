@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <th.co.ask.eip_mobile.view.CustomTextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Name"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="20sp"
+            app:typeface="robotoBlack" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <th.co.ask.eip_mobile.view.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer Card No : "
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/fragment_work_plan_item_secondary_text_size"
+                app:typeface="roboto" />
+
+            <th.co.ask.eip_mobile.view.CustomTextView
+                android:id="@+id/tvCustNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/fragment_work_plan_item_secondary_text_size"
+                app:typeface="roboto" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fragment_work_plan_item_space_small"
+            android:orientation="horizontal">
+
+            <th.co.ask.eip_mobile.view.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SALE_CALL_NO"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/fragment_work_plan_item_secondary_text_size"
+                app:typeface="roboto" />
+
+            <th.co.ask.eip_mobile.view.CustomTextView
+                android:id="@+id/tvSaleCallNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/fragment_work_plan_item_secondary_text_size"
+                app:typeface="roboto" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
